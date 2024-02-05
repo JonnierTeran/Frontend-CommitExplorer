@@ -4,6 +4,8 @@ import { ChartModule } from 'primeng/chart';
 import { CommitExplorerServiceService } from '../../Services/commit-explorer-service.service';
 import { RequestCommitsModels } from '../../Models/RequestCommits.models';
 import { ResponseCommitsModels } from '../../Models/ResponseCommits.models';
+import { datasetsModels } from '../../Models/datasets.models';
+import { log } from 'console';
 
 @Component({
     selector: 'app-grafic-commits-component',
@@ -21,8 +23,8 @@ export class GraficCommitsComponentComponent implements OnInit {
     //Propiedad para manejar los estilos de la grafica
     public options: any;
 
-    
-    public Response:ResponseCommitsModels[];
+    //Propiedad para llenar la informacion datasheet para generar cada grafica
+    public datashetCommit:datasetsModels[];
 
 
     // Constructor de la clase, utilizando inyección de dependencias para obtener PLATFORM_ID
@@ -31,8 +33,8 @@ export class GraficCommitsComponentComponent implements OnInit {
         private _CommitService: CommitExplorerServiceService) 
     {
 
-        //Se inicializa Array que almacenara las respuestas http
-        this.Response=[];
+        this.datashetCommit = []; //inicializa el arrays sin registros
+     
 
     }
 
@@ -48,20 +50,10 @@ export class GraficCommitsComponentComponent implements OnInit {
             const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
 
-            //Data del Diagrama
+            //Data del Diagrama // Informacion que se grafica
             this.data = {
                 labels: ['1 Semana Commits', '2 Semana Commits', 'Semana 3 Commits', 'Semana 4 Commits', 'Semana 5 Commits', 'Semana 6 Commits', 'Semana 7 Commits'],
-                datasets: [
-                    {
-                        label: 'Repo 1',
-                        fill: false,
-                        //borderColor: documentStyle.getPropertyValue('--blue-500'),
-                        yAxisID: 'y0',
-                        tension: 0.4,
-                        data: [65, 59, 80, 81, 56, 55, 10]
-                    }
-
-                ]
+                datasets: this.datashetCommit 
             };
 
 
@@ -131,15 +123,31 @@ export class GraficCommitsComponentComponent implements OnInit {
             .subscribe(
                 // Función de éxito (Res es la respuesta de la API)
                 Res => {
-                    // Asignar la respuesta a la propiedad Response de la clase actual
-                    this.Response = Res;
+                   
+                    
+                   //Recorro la Respuesta del Arreglo
+                    Res.forEach(Item =>{
+                        
+
+                        //Lleno la data del datashet que cargara la grafica
+                        this.datashetCommit.push(new datasetsModels(Item.nameRepo, Item.infoRepo.all.slice(-7)));   
+
+                    })
+
+
+
                 },
                 // Función de error (Err contiene información sobre el error)
                 Err => {
                     // Imprimir el error en la consola
+                    console.log("Fallo");
+                    
                     console.log(Err);
                 }
             );
+
+            console.log('click');
+            
 }
 
 

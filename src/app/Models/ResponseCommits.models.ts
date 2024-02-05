@@ -4,10 +4,10 @@ import { CountCommitsModels } from "./CountCommits.models";
 export class ResponseCommitsModels {
 
     // Propiedad privada que almacena el nombre del repositorio.
-    private nameRepo:string;
+    public nameRepo:string;
 
     // Propiedad privada que almacena la información de los commits del repositorio.
-    private infoRepo: CountCommitsModels;
+    public infoRepo: CountCommitsModels;
 
     /**
      * Constructor de la clase ResponseCommitsModels.
@@ -24,7 +24,7 @@ export class ResponseCommitsModels {
      * Método getter para obtener el nombre del repositorio.
      * @returns {string} - Nombre del repositorio.
      */
-    get NameRepo(): string {
+    public getNameRepo(): string {
         return this.nameRepo;
     }
 
@@ -32,7 +32,7 @@ export class ResponseCommitsModels {
      * Método setter para establecer el nombre del repositorio.
      * @param {string} value - Nuevo valor para el nombre del repositorio.
      */
-    set NameRepo(value: string) {
+    public setNameRepo(value: string) {
         this.nameRepo = value;
     }
 
@@ -40,7 +40,7 @@ export class ResponseCommitsModels {
      * Método getter para obtener la información de los commits del repositorio.
      * @returns {CountCommitsModels} - Información de los commits del repositorio.
      */
-    get InfoRepo(): CountCommitsModels {
+    public getInfoRepo(): CountCommitsModels {
         return this.infoRepo;
     }
 
@@ -48,7 +48,7 @@ export class ResponseCommitsModels {
      * Método setter para establecer la información de los commits del repositorio.
      * @param {CountCommitsModels} value - Nuevo valor para la información de los commits del repositorio.
      */
-    set InfoRepo(value: CountCommitsModels) {
+    public setInfoRepo(value: CountCommitsModels) {
         this.infoRepo = value;
     }
 }
