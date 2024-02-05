@@ -5,11 +5,12 @@ import { CommitExplorerServiceService } from './Services/commit-explorer-service
 import { RequestCommitsModels } from './Models/RequestCommits.models';
 import { log } from 'console';
 import { NavVarComponent } from './Components/nav-var/nav-var.component';
+import { FooterComponentComponent } from './Components/footer-component/footer-component.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavVarComponent],
+  imports: [CommonModule, RouterOutlet, NavVarComponent,FooterComponentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
