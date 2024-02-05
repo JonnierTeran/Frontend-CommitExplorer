@@ -8,9 +8,9 @@
             <div class="container-fluid custom-container">
                 <form [formGroup]="Form" (ngSubmit)="GetResponseAPI()">
                 <input type="text" class="b5" placeholder="React - Angular - Flutter"  formControlName="libreria"> &nbsp;
-
+                
+                <label>Selecciona La Cantidad de Repositorios</label>        &nbsp;
                 <select  id="selectNumber"  formControlName="cantidadRepo">
-                      <option hidden>Selecciona La Cantidad de Repositorios:</option> 
                       <option>1</option> 
                       <option>2</option>
                       <option>3</option>

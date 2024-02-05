@@ -131,6 +131,7 @@ export class GraficCommitsComponentComponent implements OnInit {
     /// Método para ejecutar el servicio y realizar una llamada a la API
     public GetResponseAPI(): void {
 
+        //Limpiar datashet
         this.datashetCommit.splice(0, this.datashetCommit.length);
         // Crear un objeto RequestCommitsModels con parámetros específicos
         let RequestBody: RequestCommitsModels = new RequestCommitsModels(this.Form.get('libreria')?.value, +this.Form.get('cantidadRepo')?.value);
