@@ -16,16 +16,5 @@ import { GraficCommitsComponentComponent } from './Components/grafic-commits-com
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  /**
-  private RequestBody:RequestCommitsModels;
-  constructor(private _CommitService:CommitExplorerServiceService){
-
-    this.RequestBody = new RequestCommitsModels("Angular",2);
-    
-    console.log("AQUI ESTA ANGULAR BRO")
-    this._CommitService.GetResponse(this.RequestBody)
-    .subscribe( Response => console.log(Response)
-              , Err=> console.log(Err))
-  }  */
-
+ 
 }
