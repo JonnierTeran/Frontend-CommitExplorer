@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { CommitExplorerServiceService } from './Services/commit-explorer-service.service';
 import { RequestCommitsModels } from './Models/RequestCommits.models';
 import { log } from 'console';
+import { NavVarComponent } from './Components/nav-var/nav-var.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, NavVarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
