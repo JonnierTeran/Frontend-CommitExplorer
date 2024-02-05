@@ -8,7 +8,7 @@ export class RequestCommitsModels {
     private libreria: string;
 
     // Propiedad privada que almacena la cantidad de repositorios.
-    private CantidadRepo: number;
+    private cantidadRepo: number;
 
     /**
      * Constructor de la clase RequestCommitsModels.
@@ -18,14 +18,14 @@ export class RequestCommitsModels {
     constructor(libreria: string, cantidadRepo: number) {
         // Inicializa las propiedades con los valores proporcionados al constructor.
         this.libreria = libreria;
-        this.CantidadRepo = cantidadRepo;
+        this.cantidadRepo = cantidadRepo;
     }
 
     /**
      * Método getter para obtener el nombre de la librería.
      * @returns {string} - Nombre de la librería.
      */
-    get Libreria(): string {
+    getLibreria(): string {
         return this.libreria;
     }
 
@@ -33,7 +33,7 @@ export class RequestCommitsModels {
      * Método setter para establecer el nombre de la librería.
      * @param {string} value - Nuevo valor para el nombre de la librería.
      */
-    set Libreria(value: string) {
+    setLibreria(value: string) {
         this.libreria = value;
     }
 
@@ -41,16 +41,16 @@ export class RequestCommitsModels {
      * Método getter para obtener la cantidad de repositorios.
      * @returns {number} - Cantidad de repositorios.
      */
-    get cantidadRepo(): number {
-        return this.CantidadRepo;
+    getCantidadRepo(): number {
+        return this.cantidadRepo;
     }
 
     /**
      * Método setter para establecer la cantidad de repositorios.
      * @param {number} value - Nuevo valor para la cantidad de repositorios.
      */
-    set cantidadRepo(value: number) {
-        this.CantidadRepo = value;
+    setCantidadRepo(value: number) {
+        this.cantidadRepo = value;
     }
 }
 

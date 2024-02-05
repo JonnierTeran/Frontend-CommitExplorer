@@ -5,12 +5,13 @@ import { CommitExplorerServiceService } from '../../Services/commit-explorer-ser
 import { RequestCommitsModels } from '../../Models/RequestCommits.models';
 import { datasetsModels } from '../../Models/datasets.models';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
     selector: 'app-grafic-commits-component',
     standalone: true,
-    imports: [ChartModule, AutoCompleteModule],
+    imports: [ChartModule, AutoCompleteModule, ReactiveFormsModule  ],
     templateUrl: './grafic-commits-component.component.html',
     styleUrl: './grafic-commits-component.component.css'
 })
@@ -24,25 +25,37 @@ export class GraficCommitsComponentComponent implements OnInit {
     public options: any;
 
     //Propiedad para llenar la informacion datasheet para generar cada grafica
-    public datashetCommit:datasetsModels[];
+    public datashetCommit: datasetsModels[];
+
+
+    //Formulario Reactivo
+    Form: FormGroup;
 
 
     // Constructor de la clase, utilizando inyección de dependencias para obtener PLATFORM_ID
-    // En este punto, platformId contiene la referencia a PLATFORM_ID y Se agrega como depenpendencia el servicio CommitService
+    // En este punto, platformId contiene la referencia a PLATFORM_ID y Se agrega como depenpendencia el servicio CommitService, y form reactivo
     constructor(@Inject(PLATFORM_ID) private platformId: Object,
-        private _CommitService: CommitExplorerServiceService) 
-    {
+        private _CommitService: CommitExplorerServiceService,
+        private _FormBuilder: FormBuilder) {
 
         this.datashetCommit = []; //inicializa el arrays sin registros
-     
+
+
+        //inicializacion del ReactiveForms
+        this.Form = new FormGroup({
+            libreria: new FormControl('', [Validators.required]),
+            cantidadRepo: new FormControl('', [Validators.required]),
+            
+        })
+
 
     }
 
     //Ciclo de vida del componente 
     ngOnInit() {
 
-        
-        
+
+
         if (isPlatformBrowser(this.platformId)) {
 
             //Configuracion del Diagrama
@@ -55,7 +68,7 @@ export class GraficCommitsComponentComponent implements OnInit {
             //Data del Diagrama // Informacion que se grafica
             this.data = {
                 labels: ['1 Semana Commits', '2 Semana Commits', 'Semana 3 Commits', 'Semana 4 Commits', 'Semana 5 Commits', 'Semana 6 Commits', 'Semana 7 Commits'],
-                datasets: this.datashetCommit 
+                datasets: this.datashetCommit
             };
 
 
@@ -117,20 +130,22 @@ export class GraficCommitsComponentComponent implements OnInit {
 
     /// Método para ejecutar el servicio y realizar una llamada a la API
     public GetResponseAPI(): void {
-    // Crear un objeto RequestCommitsModels con parámetros específicos
-        let RequestBody: RequestCommitsModels = new RequestCommitsModels("flutter", 5);
+
+        this.datashetCommit.splice(0, this.datashetCommit.length);
+        // Crear un objeto RequestCommitsModels con parámetros específicos
+        let RequestBody: RequestCommitsModels = new RequestCommitsModels(this.Form.get('libreria')?.value, +this.Form.get('cantidadRepo')?.value);
 
         // Llamar al servicio para obtener la respuesta de la API
         this._CommitService.GetResponse(RequestBody)
             .subscribe(
                 // Función de éxito (Res es la respuesta de la API)
                 Res => {
-                   
-                   //Recorro la Respuesta del Arreglo
-                    Res.forEach(Item =>{
-                    
+
+                    //Recorro la Respuesta del Arreglo
+                    Res.forEach(Item => {
+
                         //Lleno la data del datashet que cargara la grafica tomando las ultimas 7 semanas
-                        this.datashetCommit.push(new datasetsModels(Item.nameRepo, Item.infoRepo.all.slice(-7)));   
+                        this.datashetCommit.push(new datasetsModels(Item.nameRepo, Item.infoRepo.all.slice(-7)));
 
                     })
 
@@ -142,9 +157,9 @@ export class GraficCommitsComponentComponent implements OnInit {
                     console.log(Err);
                 }
             );
-            
-}
 
-//___________________________________________________________________________________________________________________________________________
+    }
+
+    //___________________________________________________________________________________________________________________________________________
 
 }

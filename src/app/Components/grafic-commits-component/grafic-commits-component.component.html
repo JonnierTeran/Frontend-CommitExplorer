@@ -6,10 +6,10 @@
     <div class="container-fluid custom-container">
         <div class="container-fluid custom-container">
             <div class="container-fluid custom-container">
-                <form>
-                <input type="text" class="b5" placeholder="Ingrese su búsqueda"> &nbsp;
+                <form [formGroup]="Form" (ngSubmit)="GetResponseAPI()">
+                <input type="text" class="b5" placeholder="React - Angular - Flutter"  formControlName="libreria"> &nbsp;
 
-                <select  id="selectNumber">
+                <select  id="selectNumber"  formControlName="cantidadRepo">
                       <option hidden>Selecciona La Cantidad de Repositorios:</option> 
                       <option>1</option> 
                       <option>2</option>
@@ -20,7 +20,7 @@
                     </select>
                   
                     &nbsp;
-                <button type="button" class="btn btn-primary" (click)="GetResponseAPI()">CONSULTAR</button>
+                <button type="submit" class="btn btn-primary" [disabled]="Form.invalid" >CONSULTAR</button>
             </form>
             </div>
             <div class="container-fluid custom-container">
