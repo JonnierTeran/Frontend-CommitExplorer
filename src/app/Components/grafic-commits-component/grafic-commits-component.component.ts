@@ -10,15 +10,24 @@ import { ChartModule } from 'primeng/chart';
   styleUrl: './grafic-commits-component.component.css'
 })
 export class GraficCommitsComponentComponent implements OnInit {
-    data: any;
     
-    options: any;
     
-    constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+    //Propiedad para guardar el Objeto de Data para la Grafica
+    public data: any;
+    
+    //Propiedad para manejar los estilos de la grafica
+    public options: any;
+
+
+    // Constructor de la clase, utilizando inyección de dependencias para obtener PLATFORM_ID
+    // En este punto, platformId contiene la referencia a PLATFORM_ID
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    
+  }
     ngOnInit() {
-        
+
         if (isPlatformBrowser(this.platformId)) {
-            // Tu código que utiliza getComputedStyle
+           
         
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text-color');
@@ -26,10 +35,10 @@ export class GraficCommitsComponentComponent implements OnInit {
             const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
             
             this.data = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['1 Semana', '2 Semana', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7'],
                 datasets: [
                 {
-                    label: 'Dataset 1',
+                    label: 'Repo 1',
                     fill: false,
                     borderColor: documentStyle.getPropertyValue('--blue-500'),
                     yAxisID: 'y',
@@ -37,16 +46,19 @@ export class GraficCommitsComponentComponent implements OnInit {
                     data: [65, 59, 80, 81, 56, 55, 10]
                 },
                 {
-                    label: 'Dataset 2',
+                    label: 'Repo 2',
                     fill: false,
-                    borderColor: documentStyle.getPropertyValue('--green-500'),
+                    borderColor: documentStyle.getPropertyValue('--red-500'),
                     yAxisID: 'y1',
                     tension: 0.4,
                     data: [28, 48, 40, 19, 86, 27, 90]
-                }
+                },
+               
             ]
         };
         
+
+        //Manejo de Posiciones y estilos de las graficas
         this.options = {
             stacked: false,
             maintainAspectRatio: false,
