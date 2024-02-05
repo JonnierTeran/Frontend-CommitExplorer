@@ -1,21 +1,22 @@
+//Modulos y Dependencias Necesarias
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CommitExplorerServiceService } from './Services/commit-explorer-service.service';
 import { RequestCommitsModels } from './Models/RequestCommits.models';
-import { log } from 'console';
 import { NavVarComponent } from './Components/nav-var/nav-var.component';
 import { FooterComponentComponent } from './Components/footer-component/footer-component.component';
 
+//Decorador de un componente
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavVarComponent,FooterComponentComponent],
+  imports: [CommonModule, RouterOutlet, NavVarComponent,FooterComponentComponent], //Componentes y librerias usadas en el componente raiz
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+  /**
   private RequestBody:RequestCommitsModels;
   constructor(private _CommitService:CommitExplorerServiceService){
 
@@ -25,5 +26,6 @@ export class AppComponent {
     this._CommitService.GetResponse(this.RequestBody)
     .subscribe( Response => console.log(Response)
               , Err=> console.log(Err))
-  }
+  }  */
+  
 }
