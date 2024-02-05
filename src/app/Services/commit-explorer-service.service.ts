@@ -24,8 +24,8 @@ export class CommitExplorerServiceService { //Servicio para realizar peticiones 
 
  //Metodo para hacer una peticion Http a la API de tipo POST, 
  //enviando un Objeto RequestBody y recibiendo la informacion Requerida en un Objeto ResponseCommitsModels
- public GetResponse(RequesBody:RequestCommitsModels):Observable<ResponseCommitsModels>{
-    return this._HttpClient.post<ResponseCommitsModels>(this.Url,RequesBody);
+ public GetResponse(RequesBody:RequestCommitsModels):Observable<ResponseCommitsModels[]>{
+    return this._HttpClient.post<ResponseCommitsModels[]>(this.Url,RequesBody);
  }
 
 }
