@@ -3,14 +3,14 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { CommitExplorerServiceService } from '../../Services/commit-explorer-service.service';
 import { RequestCommitsModels } from '../../Models/RequestCommits.models';
-import { ResponseCommitsModels } from '../../Models/ResponseCommits.models';
 import { datasetsModels } from '../../Models/datasets.models';
-import { log } from 'console';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 @Component({
     selector: 'app-grafic-commits-component',
     standalone: true,
-    imports: [ChartModule],
+    imports: [ChartModule, AutoCompleteModule],
     templateUrl: './grafic-commits-component.component.html',
     styleUrl: './grafic-commits-component.component.css'
 })
@@ -41,6 +41,8 @@ export class GraficCommitsComponentComponent implements OnInit {
     //Ciclo de vida del componente 
     ngOnInit() {
 
+        
+        
         if (isPlatformBrowser(this.platformId)) {
 
             //Configuracion del Diagrama
@@ -116,7 +118,7 @@ export class GraficCommitsComponentComponent implements OnInit {
     /// Método para ejecutar el servicio y realizar una llamada a la API
     public GetResponseAPI(): void {
     // Crear un objeto RequestCommitsModels con parámetros específicos
-        let RequestBody: RequestCommitsModels = new RequestCommitsModels("Angular", 2);
+        let RequestBody: RequestCommitsModels = new RequestCommitsModels("flutter", 5);
 
         // Llamar al servicio para obtener la respuesta de la API
         this._CommitService.GetResponse(RequestBody)
@@ -124,32 +126,25 @@ export class GraficCommitsComponentComponent implements OnInit {
                 // Función de éxito (Res es la respuesta de la API)
                 Res => {
                    
-                    
                    //Recorro la Respuesta del Arreglo
                     Res.forEach(Item =>{
-                        
-
-                        //Lleno la data del datashet que cargara la grafica
+                    
+                        //Lleno la data del datashet que cargara la grafica tomando las ultimas 7 semanas
                         this.datashetCommit.push(new datasetsModels(Item.nameRepo, Item.infoRepo.all.slice(-7)));   
 
                     })
-
-
 
                 },
                 // Función de error (Err contiene información sobre el error)
                 Err => {
                     // Imprimir el error en la consola
-                    console.log("Fallo");
-                    
+
                     console.log(Err);
                 }
             );
-
-            console.log('click');
             
 }
 
-
+//___________________________________________________________________________________________________________________________________________
 
 }

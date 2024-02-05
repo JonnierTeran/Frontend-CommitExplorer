@@ -3,7 +3,7 @@ export class datasetsModels {
     label: string;
     fill: boolean;
     // borderColor: string; // Descomenta si deseas incluir la propiedad 'borderColor'
-    yAxisID: string;
+    //yAxisID: string;
     tension: number;
     data: number[];
   
@@ -13,7 +13,7 @@ export class datasetsModels {
       this.label = label;
       this.fill = false;
       // this.borderColor = borderColor; // Descomenta si deseas incluir la propiedad 'borderColor'
-      this.yAxisID = 'y0';
+     // this.yAxisID = 'y0';
       this.tension = 0.4;
       this.data = data;
     }
